@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const db = require("./config/mongoose.js");
+const Tasks = require("./models/task");
 // Setting Up Assets For The Static File (.css, Scripts , Images)
 const assets = express.static("./assets");
 //MiddleWare To Use The assets
 app.use(assets);
-
+app.use(express.urlencoded());
 //Importing Router From The index.js File Inside Routes Folder
 const router = require("./routes/index");
 //MiddleWare To Use The Router Imported Above

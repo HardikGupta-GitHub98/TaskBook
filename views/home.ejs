@@ -3,10 +3,92 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="/CSS/home.css" />
+		<script
+			src="https://kit.fontawesome.com/0baf93e608.js"
+			crossorigin="anonymous"
+		></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><%= title %></title>
 	</head>
 	<body>
-		<h1>Home Controller And Router Is Working</h1>
+		<section id="section">
+			<div id="heading">
+				<h1>Task Book</h1>
+			</div>
+			<div id="data-entry">
+				<form action="/createTask" method="POST">
+					<div id="description" class="flex-row input-div">
+						<p>Descprition</p>
+						<input
+							type="text"
+							name="description"
+							placeholder="Enter the task Description....."
+						/>
+					</div>
+					<div id="category" class="flex-row input-div">
+						<p>Category</p>
+						<select name="category">
+							<option value="" disabled selected
+								>Select A Category For The Task</option
+							>
+							<option value="COLLEGE">College</option>
+							<option value="HOME">Home</option>
+							<option value="MARKET">Market</option>
+							<option value="WORK">Work</option>
+						</select>
+					</div>
+					<div id="date" class="flex-row input-div">
+						<p>Due Date</p>
+						<input type="date" name="duedate" />
+					</div>
+					<div id="Buttons" class="flex-row">
+						<div class="add-button">
+							<button type="submit">
+								<i class="fas fa-plus"></i>
+								<p style="margin: auto;">ADD</p>
+							</button>
+						</div>
+						<div class="delete-button">
+							<i class="far fa-trash-alt"></i>
+							<p style="margin: auto;">DELETE</p>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div id="pending-tasks">
+				<% for(var i of Pending_Tasks){ %>
+				<div class="single-checkbox">
+					<div class="left">
+						<input type="checkbox" class="single-task" name="db-task" />
+						<div class="desc-and-date">
+							<p class="desc"><%= i.description %></p>
+							<p class="duedate">
+								<i class="fas fa-calendar-week"></i> <%= i.duedate %>
+							</p>
+						</div>
+					</div>
+					<% if(i.category == "HOME"){ %>
+					<div class="category-style" style="background-color: red;">
+						<p><%= i.category %></p>
+					</div>
+					<% } else if( i.category == "COLLEGE"){ %>
+					<div class="category-style" style="background-color: green;">
+						<p><%= i.category %></p>
+					</div>
+					<% }else if(i.category == "MARKET"){ %>
+					<div class="category-style" style="background-color: yellow;">
+						<p><%= i.category %></p>
+					</div>
+					<% }else { %>
+					<div class="category-style" style="background-color: GREY;">
+						<p><%= i.category %></p>
+					</div>
+					<% } %>
+				</div>
+
+				<% } %>
+			</div>
+		</section>
 	</body>
 </html>
