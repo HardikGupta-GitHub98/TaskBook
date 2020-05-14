@@ -5,4 +5,5 @@ const router = express.Router();
 const homeController = require("../Controllers/home_Controller");
 router.get("/", homeController.home);
 router.post("/createTask", homeController.create);
+router.post("/deleteTask", homeController.delete);
 module.exports = router;

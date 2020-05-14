@@ -1,8 +1,9 @@
-const db = require("../config/mongoose.js");
-const Tasks = require("../models/task");
+const mongoose = require("mongoose");
+
+const Task = require("../models/task");
 
 module.exports.home = function (req, res) {
-	Tasks.find({}, function (err, tasks) {
+	Task.find({}, function (err, tasks) {
 		if (err) {
 			console.log(`Error Fetching Tasks From DB  ${err}`);
 		} else {
@@ -16,7 +17,7 @@ module.exports.home = function (req, res) {
 };
 
 module.exports.create = function (req, res) {
-	Tasks.create(
+	Task.create(
 		{
 			description: req.body.description,
 			category: req.body.category,
@@ -33,4 +34,21 @@ module.exports.create = function (req, res) {
 			return;
 		}
 	);
+};
+
+module.exports.delete = function (req, res) {
+	const i = req.body.dbtask;
+	console.log(i);
+
+	for (const j of i) {
+		var id = mongoose.Types.ObjectId(j);
+
+		Task.findByIdAndDelete(id, function (err) {
+			if (err) {
+				console.log(`Error In Deleting The Task ${err}`);
+			}
+		});
+	}
+	res.redirect("back");
+	return;
 };
