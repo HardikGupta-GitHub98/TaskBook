@@ -1,7 +1,15 @@
+// CONTROLLER FOR THE HOME PAGE
+// ALL THE REQUIRED MODULES ARE IMPORTED
 const mongoose = require("mongoose");
-
 const Task = require("../models/task");
 
+// THIS IS THE MOMENT PACKAGE OF THE NODE JS WHIC IS USED TO SHOW THE CURRENT DATE AND TIME ON THE
+// WEBSITES AND APPS.
+// THE BACKGROND COLOR FOR THE TASKS WHOSE DUE-DATE IS THE CURRENT DATE
+// IS RED
+const moment = require("moment");
+
+// CONTROLLER GOR RENDERING THE HOME PAGE
 module.exports.home = function (req, res) {
 	Task.find({}, function (err, tasks) {
 		if (err) {
@@ -10,12 +18,14 @@ module.exports.home = function (req, res) {
 			res.render("home", {
 				title: "Home",
 				Pending_Tasks: tasks,
+				moment: moment,
 			});
 		}
 		return;
 	});
 };
 
+// CONTROLLER FOR CREATING A NEW TASK
 module.exports.create = function (req, res) {
 	Task.create(
 		{
@@ -36,6 +46,7 @@ module.exports.create = function (req, res) {
 	);
 };
 
+// CONTROLLER FOR DELETING MULTIPLE TASKS
 module.exports.delete = function (req, res) {
 	const i = req.body.dbtask;
 	console.log(i);

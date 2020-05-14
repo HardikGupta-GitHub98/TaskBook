@@ -90,7 +90,7 @@ select {
 .add-button {
 	background-color: rgb(70, 70, 70);
 	height: 65%;
-	width: 150px;
+	width: 200px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -103,7 +103,7 @@ select {
 	border: none;
 	background-color: rgb(70, 70, 70);
 	color: white;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -113,10 +113,10 @@ select {
 	cursor: pointer;
 }
 
-.delete-button {
+/* .delete-button {
 	background-color: rgb(237, 56, 35);
 	height: 65%;
-	width: 150px;
+	width: 200px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -126,7 +126,7 @@ select {
 	padding-left: 10px;
 	border-radius: 25px;
 	cursor: pointer;
-}
+} */
 
 .single-checkbox {
 	display: flex;
@@ -134,9 +134,7 @@ select {
 	align-items: center;
 	border-bottom: solid 1px rgb(102, 102, 102);
 }
-/* .single-task:checked .desc-and-date .desc {
-	text-decoration: line-through;
-} */
+
 .desc-and-date {
 	display: flex;
 	flex-direction: column;
@@ -147,11 +145,22 @@ select {
 	font-size: 1.1rem;
 	margin: 0px;
 	color: rgb(32, 30, 30);
+	font-weight: 800;
 }
 .duedate {
 	font-size: 0.9rem;
 	margin: 5px 0px;
 }
+
+.single-checkbox-urgent {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: solid 1px rgb(102, 102, 102);
+	background-color: rgb(236, 90, 90);
+	color: white;
+}
+
 .left {
 	width: 60%;
 	display: flex;

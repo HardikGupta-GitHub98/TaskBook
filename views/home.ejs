@@ -2,7 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<!-- linking the CSS styleSheet from Assets Folder -->
 		<link rel="stylesheet" href="/CSS/home.css" />
+
+		<!-- FontAwsome Script -->
 		<script
 			src="https://kit.fontawesome.com/0baf93e608.js"
 			crossorigin="anonymous"
@@ -13,10 +16,17 @@
 	<body>
 		<section id="section">
 			<div id="heading">
-				<h1>Task Book</h1>
+				<h1>TASK BOOK</h1>
 			</div>
+
+			<!-- DIV FOR TAKING INPUT FROM THE USER -->
 			<div id="data-entry">
+
+				<!-- DATA-INPUT FORM -->
 				<form action="/createTask" method="POST" id="input">
+
+					<!-- DESCRIPTION INPUT OF THE TASK  -->
+
 					<div id="description" class="flex-row input-div">
 						<p>Descprition</p>
 						<input
@@ -25,6 +35,9 @@
 							placeholder="Enter the task Description....."
 						/>
 					</div>
+
+					<!-- CATEGORY INPUT FROM THE USER  -->
+
 					<div id="category" class="flex-row input-div">
 						<p>Category</p>
 						<select name="category">
@@ -35,34 +48,58 @@
 							<option value="HOME">Home</option>
 							<option value="MARKET">Market</option>
 							<option value="WORK">Work</option>
+							<option value="OTHER">Other</option>
 						</select>
 					</div>
+
+					<!-- TAKING THE DUE-DATE INPUT IN THE FORM OF DATE  -->
+
 					<div id="date" class="flex-row input-div">
 						<p>Due Date</p>
 						<input type="date" name="duedate" />
 					</div>
+
+
+		 <!-- BUTTONS FOR TAKING SENDING THE DATA-INPUT AND DELETING THE CHECKED TASKS  -->
 					<div id="Buttons" class="flex-row">
 						<div class="add-button">
+							<!-- ADD TASKS BUTTON  -->
 							<button type="submit">
 								<i class="fas fa-plus"></i>
-								<p style="margin: auto;">ADD</p>
+								<p style="margin: auto;">ADD TASK</p>
 							</button>
 						</div>
 						
+					<!-- REMOVE TASKS BUTTON  -->
 							<div class="add-button" style="background-color: rgb(237, 56, 35);">
 							 <button type="submit" form="pending" style="background-color: rgb(237, 56, 35);">
 								<i class="far fa-trash-alt"></i>
-								<p style="margin: auto;">DELETE</p>
+								<p style="margin: auto;">REMOVE TASKS</p>
 							 </button>
 							</div>
 						</button>
 					</div>
 				</form>
 			</div>
+
+			<!-- FORM TO TAKE INPUT IN THE FORM OF CHECKBOXES  -->
 			<form action="/deleteTask" id="pending" method="post">
+
+				<!-- DIV CONTAINING ALL THE PENDING TASKS IN THE DATABASE -->
 				<div id="pending-tasks">
+
+			<!-- ITERATOR TO PRINT ALL THE PENDING TASKS IN THE DATABASE  -->
 					<% for(var i of Pending_Tasks){ %>
-					<div class="single-checkbox">
+
+	<!-- IF THE DUE-DATE OF THE TASK MATCHES THE CURRENT DATE , THEM THE BACKGROUND COLOR OF THE TASK IS RED TO, -->
+	<!-- TO INDICATE THE CLOSE DEADLINE TO COMPLETE THE TASK -->
+
+						<% if(moment().format('YYYY-MM-DD') == i.duedate) { %> 
+							<div class="single-checkbox-urgent" >
+						
+							<% }else{ %>
+								<div class="single-checkbox">
+							<% } %> 
 						<div class="left">
 							<input type="checkbox" class="single-task" name="dbtask[]" value="<%= i._id %>" />
 							<div class="desc-and-date">
@@ -73,11 +110,11 @@
 							</div>
 						</div>
 						<% if(i.category == "HOME"){ %>
-						<div class="category-style" style="background-color: red;">
+						<div class="category-style" style="background-color: rgb(253, 33, 33);">
 							<p><%= i.category %></p>
 						</div>
 						<% } else if( i.category == "COLLEGE"){ %>
-						<div class="category-style" style="background-color: green;">
+						<div class="category-style" style="background-color: rgb(11, 77, 116);">
 							<p><%= i.category %></p>
 						</div>
 						<% }else if(i.category == "MARKET"){ %>
@@ -87,16 +124,31 @@
 						>
 							<p><%= i.category %></p>
 						</div>
-						<% }else { %>
-						<div class="category-style" style="background-color: GREY;">
+						<% }else if(i.category == "OTHER"){ %>
+						<div class="category-style" style="background-color: rgb(49, 87, 13);">
 							<p><%= i.category %></p>
 						</div>
-						<% } %>
+						<% } else if(i.category == "WORK"){ %>
+							<div class="category-style" style="background-color: rgb(218, 115, 204);">
+							<p><%= i.category %></p>
+						</div>
+					<% }  else {%> 
+						<div class="category-style" style="background-color:inherit;">
+							<p><%= i.category %></p>
+						</div>
+					<% } %> 
 					</div>
 
 					<% } %>
 				</div>
 			</form>
 		</section>
+
+
+		<!-- SCRIPT FOR THE JQUERY  -->
+		<script src="/JS/jquery-3.5.0.js"></script>
+
+		<!-- IMPORTING THE JS SCRIPT  -->
+		<script src="/JS/jqscript.js"></script>
 	</body>
 </html>
